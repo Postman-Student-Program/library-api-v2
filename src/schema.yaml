@@ -1,0 +1,310 @@
+openapi: 3.0.0
+info:
+  version: 2.0.0
+  title: Postman Library API v2
+servers:
+  - url: 'https://TODO.url'
+paths:
+  /:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+  /books:
+    get:
+      summary: 'Get all books. Optionally filter by genre, checkedOut status, or search keyword'
+      operationId: getBooks
+      security: [] # No security
+      parameters:
+        - name: genre
+          in: query
+          description: 'a genre to filter for'
+          required: false
+          schema:
+            type: string
+        - name: checkedOut
+          in: query
+          description: 'a value true or false'
+          required: false
+          schema:
+            type: string
+        - name: search
+          in: query
+          description: 'a search term to match against author/title'
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'A list of all books'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: 'Add a book'
+      operationId: createBook
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBookInput'
+              type: object
+              properties:
+                title:
+                  type: string
+                  minLength: 1
+                author:
+                  type: string
+                  minLength: 1
+                genre:
+                  type: string
+                  minLength: 1
+                yearPublished:
+                  type: integer
+                checkedOut:
+                  type: boolean
+              required:
+                - title
+                - author
+                - genre
+                - yearPublished
+      responses:
+        '201':
+          description: 'Book created successfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /books/{id}:
+    get:
+      summary: 'Get a specific book'
+      operationId: getBook
+      security: [] # No security
+      parameters:
+        - $ref: '#/components/parameters/BookId'
+      responses:
+        '200':
+          description: 'A list of books matching the search genre'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: 'Book not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      summary: 'Update a book by id'
+      operationId: updateBook
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - $ref: '#/components/parameters/BookId'
+      responses:
+        '200':
+          description: 'Update successful'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403': # if attempting to alter book in permanent collection
+          description: Not permitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Book not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: 'Delete a book by id'
+      operationId: deleteBook
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - $ref: '#/components/parameters/BookId'
+      responses:
+        '204':
+          description: 'Delete successful'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403': # if attempting to alter book in permanent collection
+          description: Not permitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Book not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: api-key
+  parameters:
+    BookId:
+      name: id
+      in: path
+      description: the id of a book
+      required: true
+      schema:
+        type: string
+  schemas:
+    UpdateBookInput:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+        author:
+          type: string
+          minLength: 1
+        genre:
+          type: string
+          minLength: 1
+        yearPublished:
+          type: integer
+    CreateBookInput:
+      type: object
+      required:
+        - title
+        - author
+        - genre
+        - yearPublished
+      properties:
+        title:
+          type: string
+          minLength: 1
+        author:
+          type: string
+          minLength: 1
+        genre:
+          type: string
+          minLength: 1
+        yearPublished:
+          type: integer
+    Book:
+      type: object
+      required:
+        - id
+        - title
+        - author
+        - genre
+        - yearPublished
+        - checkedOut
+        - isPermanentCollection
+        - createdAt
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+        genre:
+          type: string
+        yearPublished:
+          type: integer
+        checkedOut:
+          type: boolean
+        isPermanentCollection:
+          type: boolean
+        createdAt:
+          type: string
+    Error:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: string
+          enum: [error]
+        message:
+          type: string
+        errors:
+          type: array
+          items: {} # any type. This property supplied in case of request validation errors

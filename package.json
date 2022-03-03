@@ -1,0 +1,26 @@
+{
+  "name": "library-api-v2",
+  "version": "2.0.0",
+  "description": "Library API for managing books",
+  "main": "index.js",
+  "scripts": {
+    "build": "yarn clean && tsc -p tsconfig.json && yarn copy-spec",
+    "start": "node dist/server.js",
+    "dev": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "copy-spec": "cp src/schema.yaml dist/schema.yaml",
+    "clean": "rm -fr dist"
+  },
+  "author": "claire.froelich@postman.com",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "3.27.2"
+  },
+  "devDependencies": {
+    "@types/node": "17.0.21",
+    "nodemon": "2.0.15",
+    "prettier": "2.5.1",
+    "ts-node": "10.6.0",
+    "typescript": "4.6.2"
+  }
+}
