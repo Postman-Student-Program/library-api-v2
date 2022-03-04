@@ -51,7 +51,11 @@ After connecting to a db with `\c <db_name>`, run `\dt` to list all tables
 
 After connecting to a db with `\c <db_name>`, you can run SQL queries.
 
-Ex: `SELECT * from "books";`
+Ex:
+
+```sql
+SELECT * from "books";
+```
 
 _Note1_: SQL keywords are case-insensitive. (`SELECT` = `select`)
 
