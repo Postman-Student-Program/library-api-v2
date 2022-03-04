@@ -1,14 +1,15 @@
 import Fastify from 'fastify'
-import schema from './generated/schema.json'
+import knex from './db/knex'
 
-const fastify = Fastify({ logger: process.env.NODE_ENV === 'development' })
+const fastify = Fastify({ logger: true })
 
 fastify.get('/ping', async (request, reply) => {
   return 'pong\n'
 })
 
 fastify.get('/books', async (request, reply) => {
-  return 'pong\n'
+  const books = await knex('books').select()
+  return books
 })
 
 const PORT = process.env.PORT || 4000
