@@ -39,11 +39,13 @@ Ex:
 SELECT * from "books";
 ```
 
-_Note1_: SQL keywords are case-insensitive. (`SELECT` = `select`)
+_Notes_
 
-_Note2_: table and column names should come in **double quotes** `""` (you don't actually need if table/column names are a single lowercase word, but keep for good practice)
+- SQL keywords are case-insensitive. (`SELECT` = `select`)
 
-_Note2_: strings must by marked with **single quotes** `''`. Ex:
+- table and column names should come in **double quotes** `""` (you don't actually need if table/column names are a single lowercase word, but keep for good practice)
+
+- strings must by marked with **single quotes** `''`. Ex:
 
 ```sql
 SELECT * FROM "books" WHERE "author" = 'borges';
