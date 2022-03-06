@@ -3,5 +3,6 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   verbose: true,
-  automock: true
+  // automock: true,
+  testMatch: ['**/*.test.ts']
 }

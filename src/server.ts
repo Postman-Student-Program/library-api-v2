@@ -1,15 +1,25 @@
 import Fastify from 'fastify'
-import knex from './db/knex'
+
+import context from './buildContext'
+import { castGetBooksParams, filterObj } from './utils'
+
+const { booksService } = context.services
 
 const fastify = Fastify({ logger: true })
 
-fastify.get('/ping', async (request, reply) => {
-  return 'pong\n'
+fastify.get('/books', async (req, res) => {
+  const params = castGetBooksParams(req.query as GetBooksParamsRaw)
+  const books = await booksService.getBooks(params)
+  return res.send(books)
 })
 
-fastify.get('/books', async (request, reply) => {
-  const books = await knex('books').select()
-  return books
+fastify.post('/books', async (req, res) => {
+  const filteredInput = filterObj<CreateBookInput>(
+    req.body as CreateBookInput,
+    ['title', 'author', 'genre', 'yearPublished']
+  )
+  const newBook = await booksService.createBook(filteredInput)
+  return res.status(201).send(newBook)
 })
 
 const PORT = process.env.PORT || 4000

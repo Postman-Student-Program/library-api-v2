@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "yarn clean && tsc -p tsconfig.build.json && yarn copy-spec",
-    "genJSON": "node scripts/genJSON.js",
     "start": "node dist/server.js",
     "dev": "nodemon",
-    "test": "jest",
+    "test": "npm run db:test:pristine && NODE_ENV=test jest --watch",
     "copy-spec": "cp src/schema.yaml dist/schema.yaml",
     "clean": "rm -fr dist",
     "psql": "psql -U librarian library_api_dev",

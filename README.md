@@ -37,7 +37,7 @@ SELECT * from "books";
 
 _Note1_: SQL keywords are case-insensitive. (`SELECT` = `select`)
 
-_Note2_: table and oclumn names should come in double quotes `""` (you don't actually need if table/column names are a single word, but keep for good practice)
+_Note2_: table and column names should come in double quotes `""` (you don't actually need if table/column names are a single lowercase word, but keep for good practice)
 
 _Note2_: strings must by marked with single quotes `''`. Ex:
 
@@ -54,14 +54,6 @@ Start api dev server
 `npm run dev`
 
 The API runs on `localhost:4000` by default unless other `PORT` is specified in the environment.
-
-### Updating schema.yaml
-
-`schema.yaml` is the single source of truth used to validate requests and reponses for the API.
-
-**IMPORTANT** Whenever you change `schema.yaml`, run `npm run genJSON` to generate a JSON version of the schema that fastify will use for validation.
-
-If you have changed any routes, be sure to update the locations of the path objects in the server route validations.
 
 ### Tests
 
