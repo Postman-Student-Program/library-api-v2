@@ -63,6 +63,6 @@ The API runs on `localhost:4000` by default unless other `PORT` is specified in 
 
 ### Testing
 
-Tests can be collacated with build files. They will be ignored in the build.
+Tests can be collocated with build files. They will be ignored in the build.
 
 Run `npm test` to start test runner. It will listen for file updates. Note that the test database is destoryed and re-migrated and seeded each run of `npm test`
