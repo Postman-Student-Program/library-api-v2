@@ -29,7 +29,7 @@ If you need to update migrations later:
 
 #### Inspecting database
 
-Run `npm run psql` in your terminal to enter the postgres CLI as the default superuser on your machine (hopefully).
+If you want to poke around the dev database or run SQL commands on it directly, run `npm run psql` in your terminal. This will enter you in the postgres CLI as the default superuser on your machine (hopefully).
 
 You can run SQL queries in the `psql` REPL
 
