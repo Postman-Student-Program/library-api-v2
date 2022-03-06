@@ -17,7 +17,6 @@ const config: { [key: string]: any } = {
     seeds: {
       directory: './seeds'
     },
-    // TOOD: create local dev db
     connection: 'postgres://localhost:5432/library_api_dev'
   },
   production: {
