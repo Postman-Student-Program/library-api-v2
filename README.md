@@ -43,7 +43,7 @@ _Notes_
 
 - SQL keywords are case-insensitive. (`SELECT` = `select`)
 
-- table and column names should come in **double quotes** `""` (you don't actually need if table/column names are a single lowercase word, but keep for good practice)
+- table and column names should come in **double quotes** `""` You don't actually need quotes if the table/column name is a single lowercase word, but just do it for good practice.
 
 - strings must by marked with **single quotes** `''`. Ex:
 
