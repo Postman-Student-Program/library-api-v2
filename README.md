@@ -2,11 +2,13 @@
 
 ## Development
 
-### Initialize database
+### Prereqs
 
 You will need to have [Postgres](https://www.postgresql.org/) installed to run test and development databases.
 
 Once Postgres is install, you should have access to the `psql` command.
+
+### Initialize database
 
 Initialize the test and development databases:
 
@@ -19,7 +21,9 @@ This will create `library_api_test` and `library_api_dev` databases with a user 
 
 #### Run migrations
 
-`npm run db:dev:pristine` ran the latest migration when you initialize the database. If you need to update migrations later:
+When you initialized the database you ran `npm run db:dev:pristine`, which ran the latest migration.
+
+If you need to update migrations later:
 
 `npm run db:dev:latest`
 
