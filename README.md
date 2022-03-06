@@ -10,7 +10,7 @@ Once Postgres is install, you should have access to the `psql` command.
 
 ### Initialize database
 
-Initialize the test and development databases:
+Run
 
 `npm run db:init`
 
