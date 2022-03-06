@@ -4,21 +4,24 @@
   "description": "Library API for managing books",
   "main": "index.js",
   "scripts": {
-    "build": "yarn clean && tsc -p tsconfig.json && yarn copy-spec",
+    "build": "yarn clean && tsc -p tsconfig.build.json && yarn copy-spec",
     "genJSON": "node scripts/genJSON.js",
     "start": "node dist/server.js",
     "dev": "nodemon",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "copy-spec": "cp src/schema.yaml dist/schema.yaml",
     "clean": "rm -fr dist",
-    "psql": "psql postgres",
+    "psql": "psql -U librarian library_api_dev",
     "db:init": "psql postgres -f ./src/db/sql/init.sql",
     "db:migrate:make": "knex --knexfile ./src/db/knexfile.ts migrate:make",
     "db:dev:reset": "NODE_ENV=development ts-node ./src/db/helpers/resetDb.ts",
     "db:dev:latest": "NODE_ENV=development knex --knexfile ./src/db/knexfile.ts migrate:latest",
     "db:dev:seed": "NODE_ENV=development knex --knexfile ./src/db/knexfile.ts seed:run",
     "db:dev:pristine": "npm run db:dev:reset && npm run db:dev:latest && npm run db:dev:seed",
-    "db:test:latest": "NODE_ENV=test knex --knexfile ./src/db/knexfile.ts migrate:latest"
+    "db:test:reset": "NODE_ENV=test ts-node ./src/db/helpers/resetDb.ts",
+    "db:test:latest": "NODE_ENV=test knex --knexfile ./src/db/knexfile.ts migrate:latest",
+    "db:test:seed": "NODE_ENV=test knex --knexfile ./src/db/knexfile.ts seed:run",
+    "db:test:pristine": "npm run db:test:reset && npm run db:test:latest && npm run db:test:seed"
   },
   "author": "claire.froelich@postman.com",
   "license": "ISC",
@@ -29,12 +32,14 @@
     "pg": "^8.7.3"
   },
   "devDependencies": {
+    "@types/jest": "^27.4.1",
     "@types/knex": "^0.16.1",
     "@types/node": "17.0.21",
     "js-yaml": "^4.1.0",
     "nodemon": "2.0.15",
     "openapi-json-schema": "^1.1.3",
     "prettier": "2.5.1",
+    "ts-jest": "^27.1.3",
     "ts-node": "10.6.0",
     "typescript": "4.6.2"
   }

@@ -1,4 +1,4 @@
-CREATE USER librarian WITH PASSWORD 'library';
+CREATE USER librarian;
 ALTER USER librarian SUPERUSER;
 
 -- Create test DB

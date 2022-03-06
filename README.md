@@ -8,48 +8,26 @@ You will need to have [Postgres](https://www.postgresql.org/) installed to run t
 
 Once Postgres is install, you should have access to the `psql` command.
 
-Initialize the test and development databases by running
+Initialize the test and development databases:
 
 `npm run db:init`
 
+`npm run db:dev:pristine`
+
 This will create `library_api_test` and `library_api_dev` databases with a user named
-`librarian`
+`librarian`, then migrate & seed them by with initial books.
 
 #### Run migrations
 
-Run migrations and seeds on the dev database with:
+`npm run db:dev:pristine` ran the latest migration when you initialize the database. If you need to update migrations later:
 
-`npm run db:dev:pristine`
-
-You can run this command anytime you want to reset the dev database.
+`npm run db:dev:latest`
 
 #### Inspecting database
 
 Run `npm run psql` in your terminal to enter the postgres CLI as the default superuser on your machine (hopefully).
 
-Use these commands in the `psql` REPL to explore
-
-**View all dbs**
-
-Use `\l`
-
-**View all Postgres users**
-
-Use `\du`
-
-**Connect to a db**
-
-Use `\c <db_name>`
-
-ex: `\c library_api_dev`
-
-**View tables in db**
-
-After connecting to a db with `\c <db_name>`, run `\dt` to list all tables
-
-**Explore table content**
-
-After connecting to a db with `\c <db_name>`, you can run SQL queries.
+You can run SQL queries in the `psql` REPL
 
 Ex:
 
@@ -77,10 +55,14 @@ Start api dev server
 
 The API runs on `localhost:4000` by default unless other `PORT` is specified in the environment.
 
-## Updating schema.yaml
+### Updating schema.yaml
 
 `schema.yaml` is the single source of truth used to validate requests and reponses for the API.
 
 **IMPORTANT** Whenever you change `schema.yaml`, run `npm run genJSON` to generate a JSON version of the schema that fastify will use for validation.
 
 If you have changed any routes, be sure to update the locations of the path objects in the server route validations.
+
+### Tests
+
+Tests can be collacated with build files. They will be ignored in the build.
