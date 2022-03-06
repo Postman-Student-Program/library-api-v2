@@ -17,7 +17,7 @@ Run
 `npm run db:dev:pristine`
 
 This will create `library_api_test` and `library_api_dev` databases with a user named
-`librarian`, then migrate & seed them by with initial books.
+`librarian`, then migrate & seed them with initial books.
 
 #### Run migrations
 
