@@ -1,4 +1,6 @@
-const config: { [key: string]: any } = {
+import config from '../config'
+
+const knexConfig: { [key: string]: any } = {
   test: {
     client: 'postgresql',
     migrations: {
@@ -21,7 +23,7 @@ const config: { [key: string]: any } = {
   },
   production: {
     client: 'postgresql',
-    connection: process.env.PROD_DATABASE_URL,
+    connection: config.prodDatabaseUrl,
     pool: {
       min: 2,
       max: 10
@@ -35,4 +37,4 @@ const config: { [key: string]: any } = {
   }
 }
 
-export default config
+export default knexConfig

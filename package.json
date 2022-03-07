@@ -27,6 +27,8 @@
   "dependencies": {
     "dotenv": "^16.0.0",
     "fastify": "3.27.2",
+    "fastify-error": "^1.0.0",
+    "fastify-openapi-glue": "^2.6.6",
     "knex": "^1.0.3",
     "pg": "^8.7.3"
   },

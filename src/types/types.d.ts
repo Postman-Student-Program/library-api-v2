@@ -15,7 +15,17 @@ interface CreateBookInput {
   genre: string
   yearPublished: number
 }
+interface UpdateBookInput {
+  title?: string
+  author?: string
+  genre?: string
+  yearPublished?: number
+  checkedOut?: boolean
+}
 
+interface IdParams {
+  id: string
+}
 interface GetBooksParamsRaw {
   search?: string
   checkedOut?: string

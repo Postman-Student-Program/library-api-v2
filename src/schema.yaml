@@ -202,7 +202,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '403': # if attempting to alter book in permanent collection
-          description: Not permitted
+          description: Forbidden
           content:
             application/json:
               schema:
@@ -248,6 +248,8 @@ components:
           minLength: 1
         yearPublished:
           type: integer
+        checkedOut:
+          type: boolean
     CreateBookInput:
       type: object
       required:

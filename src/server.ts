@@ -1,26 +1,15 @@
 import Fastify from 'fastify'
+import openapiGlue from 'fastify-openapi-glue'
+import RouteHandler from './RouteHandler'
 
-import context from './buildContext'
-import { castGetBooksParams, filterObj } from './utils'
-
-const { booksService } = context.services
+const glueOptions = {
+  specification: `${__dirname}/schema.yaml`,
+  service: new RouteHandler()
+}
 
 const fastify = Fastify({ logger: true })
 
-fastify.get('/books', async (req, res) => {
-  const params = castGetBooksParams(req.query as GetBooksParamsRaw)
-  const books = await booksService.getBooks(params)
-  return res.send(books)
-})
-
-fastify.post('/books', async (req, res) => {
-  const filteredInput = filterObj<CreateBookInput>(
-    req.body as CreateBookInput,
-    ['title', 'author', 'genre', 'yearPublished']
-  )
-  const newBook = await booksService.createBook(filteredInput)
-  return res.status(201).send(newBook)
-})
+fastify.register(openapiGlue, glueOptions)
 
 const PORT = process.env.PORT || 4000
 

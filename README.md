@@ -53,6 +53,12 @@ SELECT * FROM "books" WHERE "author" = 'borges';
 
 ### Install and develop
 
+First copy the env vars to your local:
+
+`cp .env.example .env`
+
+You can use the default API Key key and value or modify it.
+
 `npm install`
 
 Start api dev server
@@ -66,3 +72,5 @@ The API runs on `localhost:4000` by default unless other `PORT` is specified in 
 Tests can be collacated with build files. They will be ignored in the build.
 
 Run `npm test` to start test runner. It will listen for file updates. Note that the test database is destoryed and re-migrated and seeded each run of `npm test`
+
+### Testing
