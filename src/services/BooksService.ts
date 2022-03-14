@@ -2,7 +2,11 @@ import BooksDal from './dals/BooksDal'
 
 import ensureBookExists from '../validations/ensureBookExists'
 import ensureNotPermanentCollection from '../validations/ensureNotPermanentCollection'
-import { filterObj } from '../utils'
+import {
+  filterObj,
+  filterObjStringsForProfanity,
+  filterProfanity
+} from '../utils'
 
 class BooksService {
   booksDal: BooksDal
@@ -26,7 +30,8 @@ class BooksService {
       'genre',
       'yearPublished'
     ])
-    return this.booksDal.createBook(filteredInput)
+
+    return this.booksDal.createBook(filterObjStringsForProfanity(filteredInput))
   }
 
   updateBook = async (
@@ -42,7 +47,10 @@ class BooksService {
       'yearPublished',
       'checkedOut'
     ])
-    return this.booksDal.updateBook({ id }, filteredInput)
+    return this.booksDal.updateBook(
+      { id },
+      filterObjStringsForProfanity(filteredInput)
+    )
   }
 
   deleteBook = async ({ id }: IdParams): Promise<void> => {
