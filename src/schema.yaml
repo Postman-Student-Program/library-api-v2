@@ -3,7 +3,7 @@ info:
   version: 2.0.0
   title: Postman Library API v2
 servers:
-  - url: 'https://TODO.url'
+  - url: 'http://localhost:4000'
 paths:
   /:
     get:
@@ -70,26 +70,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateBookInput'
-              type: object
-              properties:
-                title:
-                  type: string
-                  minLength: 1
-                author:
-                  type: string
-                  minLength: 1
-                genre:
-                  type: string
-                  minLength: 1
-                yearPublished:
-                  type: integer
-                checkedOut:
-                  type: boolean
-              required:
-                - title
-                - author
-                - genre
-                - yearPublished
       responses:
         '201':
           description: 'Book created successfully'
@@ -148,6 +128,12 @@ paths:
         - ApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/BookId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBookInput'
       responses:
         '200':
           description: 'Update successful'
@@ -236,6 +222,12 @@ components:
   schemas:
     UpdateBookInput:
       type: object
+      anyOf:
+        - required: [title]
+        - required: [author]
+        - required: [genre]
+        - required: [yearPublished]
+        - required: [checkedOut]
       properties:
         title:
           type: string
@@ -300,12 +292,8 @@ components:
     Error:
       type: object
       required:
-        - status
         - message
       properties:
-        status:
-          type: string
-          enum: [error]
         message:
           type: string
         errors:

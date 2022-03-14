@@ -4,12 +4,26 @@ import RouteHandler from './RouteHandler'
 
 const glueOptions = {
   specification: `${__dirname}/schema.yaml`,
-  service: new RouteHandler()
+  service: new RouteHandler(),
+  ajvOptions: {
+    allErrors: true
+  }
 }
 
 const fastify = Fastify({ logger: true })
 
 fastify.register(openapiGlue, glueOptions)
+
+/** Shim for catching validation errors and returning 400 */
+/** For some reason fastify isn't handling these */
+/** Debug someday.... */
+fastify.setErrorHandler(function (err: any, _req: any, res: any) {
+  if (err.validation && err.validation.length) {
+    err.errors = err.validation
+    err.statusCode = 400
+  }
+  res.status(err.statusCode || 500).send(err)
+})
 
 const PORT = process.env.PORT || 4000
 

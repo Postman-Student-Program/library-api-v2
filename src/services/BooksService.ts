@@ -10,20 +10,29 @@ class BooksService {
     this.booksDal = booksDal
   }
 
-  async getBook({ id }: IdParams): Promise<Book> {
+  getBook = async ({ id }: IdParams): Promise<Book> => {
     const book = await ensureBookExists({ id }, this.booksDal)
     return book
   }
 
-  async getBooks(params: GetBooksParams = {}): Promise<Book[]> {
+  getBooks = async (params: GetBooksParams = {}): Promise<Book[]> => {
     return this.booksDal.getBooks(params)
   }
 
-  async createBook(input: CreateBookInput): Promise<Book> {
-    return this.booksDal.createBook(input)
+  createBook = async (input: CreateBookInput): Promise<Book> => {
+    const filteredInput = filterObj(input, [
+      'title',
+      'author',
+      'genre',
+      'yearPublished'
+    ])
+    return this.booksDal.createBook(filteredInput)
   }
 
-  async updateBook({ id }: IdParams, input: UpdateBookInput): Promise<Book> {
+  updateBook = async (
+    { id }: IdParams,
+    input: UpdateBookInput
+  ): Promise<Book> => {
     const book = await ensureBookExists({ id }, this.booksDal)
     ensureNotPermanentCollection(book)
     const filteredInput = filterObj(input, [
@@ -35,7 +44,8 @@ class BooksService {
     ])
     return this.booksDal.updateBook({ id }, filteredInput)
   }
-  async deleteBook({ id }: IdParams): Promise<void> {
+
+  deleteBook = async ({ id }: IdParams): Promise<void> => {
     const book = await ensureBookExists({ id }, this.booksDal)
     ensureNotPermanentCollection(book)
 

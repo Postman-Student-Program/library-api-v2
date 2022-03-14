@@ -9,33 +9,38 @@ const { booksService } = context.services
 class RouteHandler {
   constructor() {}
 
-  async healthcheck(_req: FastifyRequest, res: FastifyReply) {
+  healthcheck = (_req: FastifyRequest, res: FastifyReply) => {
     return res.send({ message: 'ok' })
   }
 
-  async getBooks(req: FastifyRequest, res: FastifyReply) {
+  getBooks = async (req: FastifyRequest, res: FastifyReply) => {
     const params = castGetBooksParams(req.query as GetBooksParamsRaw)
     const books = await booksService.getBooks(params)
     return res.send(books)
   }
 
-  async createBook(req: FastifyRequest, res: FastifyReply) {
+  createBook = async (req: FastifyRequest, res: FastifyReply) => {
     requireApiKey(req)
-    // filter out extraneous inputs
-    const filteredInput = filterObj<CreateBookInput>(
-      req.body as CreateBookInput,
-      ['title', 'author', 'genre', 'yearPublished']
-    )
-    const newBook = await booksService.createBook(filteredInput)
+    // const newBook = {
+    //   id: 'foo',
+    //   title: 'foo',
+    //   author: 'foo',
+    //   genre: 'foo',
+    //   yearPublished: 1400,
+    //   isPermanentCollection: false,
+    //   checkedOut: false,
+    //   createdAt: 'foo'
+    // }
+    const newBook = await booksService.createBook(req.body as CreateBookInput)
     return res.status(201).send(newBook)
   }
 
-  async getBook(req: FastifyRequest, res: FastifyReply) {
+  getBook = async (req: FastifyRequest, res: FastifyReply) => {
     const book = await booksService.getBook(req.params as IdParams)
     return res.send(book)
   }
 
-  async updateBook(req: FastifyRequest, res: FastifyReply) {
+  updateBook = async (req: FastifyRequest, res: FastifyReply) => {
     requireApiKey(req)
     const params = req.params as IdParams
     const input = req.body as UpdateBookInput
@@ -43,7 +48,7 @@ class RouteHandler {
     return res.send(book)
   }
 
-  async deleteBook(req: FastifyRequest, res: FastifyReply) {
+  deleteBook = async (req: FastifyRequest, res: FastifyReply) => {
     requireApiKey(req)
     const params = req.params as IdParams
     await booksService.deleteBook(params)

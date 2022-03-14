@@ -73,4 +73,8 @@ Tests can be collocated with build files. They will be ignored in the build.
 
 Run `npm test` to start test runner. It will listen for file updates. Note that the test database is destoryed and re-migrated and seeded each run of `npm test`
 
-### Testing
+### Debugging in vscode
+
+Open the debugger tab, select `launch dev server` and the task, and press the "play" button.
+
+This will launch the dev server in vscode and allow you to add breakpoints for debugging.

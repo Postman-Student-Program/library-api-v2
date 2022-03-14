@@ -1,4 +1,4 @@
-import context from '../../buildContext'
+import context from '../../context'
 import fixtures from '../fixtures'
 import booksSeeds from '../../db/fixtures/books'
 import { delAllUserAddedBooks, updateBook } from '../utils/dbUtils'
