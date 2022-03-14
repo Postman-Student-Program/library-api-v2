@@ -73,6 +73,10 @@ Tests can be collocated with build files. They will be ignored in the build.
 
 Run `npm test` to start test runner. It will listen for file updates. Note that the test database is destoryed and re-migrated and seeded each run of `npm test`
 
+#### Testing API in Postman
+
+Import the `Test_Runner_Story.postman_collection.json` file into Postman and run the collection to carry out BDD tests.
+
 ### Debugging in vscode
 
 Open the debugger tab, select `launch dev server` and the task, and press the "play" button.
