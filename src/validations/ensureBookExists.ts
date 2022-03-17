@@ -10,7 +10,7 @@ const ensureBookExists = async (
 ): Promise<Book> => {
   const book = await booksDal.getBook({ id })
   if (!book) {
-    throw new NotFoundError(`Book with id '${id} not found`)
+    throw new NotFoundError(`Book with id '${id}' not found`)
   }
   return book
 }

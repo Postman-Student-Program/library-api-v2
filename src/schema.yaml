@@ -104,7 +104,7 @@ paths:
         - $ref: '#/components/parameters/BookId'
       responses:
         '200':
-          description: 'A list of books matching the search genre'
+          description: 'Get a book by id'
           content:
             application/json:
               schema:
