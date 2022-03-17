@@ -21,16 +21,6 @@ class RouteHandler {
 
   createBook = async (req: FastifyRequest, res: FastifyReply) => {
     requireApiKey(req)
-    // const newBook = {
-    //   id: 'foo',
-    //   title: 'foo',
-    //   author: 'foo',
-    //   genre: 'foo',
-    //   yearPublished: 1400,
-    //   isPermanentCollection: false,
-    //   checkedOut: false,
-    //   createdAt: 'foo'
-    // }
     const newBook = await booksService.createBook(req.body as CreateBookInput)
     return res.status(201).send(newBook)
   }
