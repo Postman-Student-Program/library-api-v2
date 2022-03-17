@@ -22,7 +22,7 @@ paths:
                     type: string
   /books:
     get:
-      summary: 'Get all books. Optionally filter by genre, checkedOut status, or search keyword'
+      summary: 'Get books'
       operationId: getBooks
       security: [] # No security
       parameters:
