@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import context from './context'
-import { castGetBooksParams, filterObj } from './utils'
+import { castGetBooksParams } from './utils'
 import requireApiKey from './validations/requireApiKey'
 
 const { booksService } = context.services

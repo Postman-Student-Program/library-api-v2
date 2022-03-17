@@ -2,11 +2,7 @@ import BooksDal from './dals/BooksDal'
 
 import ensureBookExists from '../validations/ensureBookExists'
 import ensureNotPermanentCollection from '../validations/ensureNotPermanentCollection'
-import {
-  filterObj,
-  filterObjStringsForProfanity,
-  filterProfanity
-} from '../utils'
+import { filterObj, filterObjStringsForProfanity } from '../utils'
 
 class BooksService {
   booksDal: BooksDal
