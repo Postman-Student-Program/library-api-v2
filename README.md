@@ -67,11 +67,13 @@ Start api dev server
 
 The API runs on `localhost:4000` by default unless other `PORT` is specified in the environment.
 
-### Testing
+### Testing services
 
-Tests can be collocated with build files. They will be ignored in the build.
+Tests will be ignored in the build, so you can put them anywhere with extension `.test.ts`.
 
-Run `npm test` to start test runner. It will listen for file updates. Note that the test database is destoryed and re-migrated and seeded each run of `npm test`
+Run `npm test` to start test runner. Note that the test database is destoryed and re-migrated and seeded each run of `npm test`.
+
+Run `npm test:watch` to run tests and continually test as code is updated.
 
 #### Testing API in Postman
 

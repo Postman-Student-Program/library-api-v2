@@ -3,7 +3,8 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 /** List any required env vars here */
-const required = ['DEMO_API_KEY_VAL']
+const required: string[] = []
+// const required = ['DEMO_API_KEY_VAL']
 
 const validateEnvVars = () => {
   let missing: string[] = []

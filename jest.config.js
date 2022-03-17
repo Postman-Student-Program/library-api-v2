@@ -4,5 +4,6 @@ module.exports = {
   testEnvironment: 'node',
   verbose: true,
   // automock: true,
-  testMatch: ['**/*.test.ts']
+  testMatch: ['**/*.test.ts'],
+  setupFiles: ['dotenv/config'] // required for Jest to find env vars
 }
