@@ -1,4 +1,4 @@
-import Fastify from 'fastify'
+import Fastify, { FastifyReply, FastifyRequest } from 'fastify'
 import openapiGlue from 'fastify-openapi-glue'
 import RouteHandler from './RouteHandler'
 
@@ -17,7 +17,11 @@ fastify.register(openapiGlue, glueOptions)
 /** Shim for catching validation errors and returning 400 */
 /** For some reason fastify isn't handling these */
 /** Debug someday.... */
-fastify.setErrorHandler(function (err: any, _req: any, res: any) {
+fastify.setErrorHandler(function (
+  err: any,
+  _req: FastifyRequest,
+  res: FastifyReply
+) {
   if (err.validation && err.validation.length) {
     err.errors = err.validation
     err.statusCode = 400
