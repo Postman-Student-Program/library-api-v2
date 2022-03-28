@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.build.json && npm run copy-spec",
-    "start": "node dist/server.js",
+    "start": "NODE_ENV=production node dist/server.js",
     "dev": "nodemon",
     "test": "npm run db:test:pristine && NODE_ENV=test jest",
     "test:watch": "npm run db:test:pristine && NODE_ENV=test jest --watch",
