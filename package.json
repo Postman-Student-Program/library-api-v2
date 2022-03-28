@@ -4,7 +4,7 @@
   "description": "Library API for managing books",
   "main": "index.js",
   "scripts": {
-    "build": "yarn clean && tsc -p tsconfig.build.json && yarn copy-spec",
+    "build": "npm run clean && tsc -p tsconfig.build.json && npm run copy-spec",
     "start": "node dist/server.js",
     "dev": "nodemon",
     "test": "npm run db:test:pristine && NODE_ENV=test jest",
@@ -31,7 +31,7 @@
     "fastify": "^3.27.4",
     "fastify-error": "^1.0.0",
     "fastify-openapi-glue": "^2.6.6",
-    "knex": "^1.0.3",
+    "knex": "^1.0.4",
     "pg": "^8.7.3"
   },
   "devDependencies": {
