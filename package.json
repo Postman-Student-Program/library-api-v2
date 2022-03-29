@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.build.json && npm run copy-spec",
-    "start": "NODE_ENV=production node dist/server.js",
+    "start": "npm run build && NODE_ENV=production node dist/server.js",
     "dev": "nodemon",
     "test": "npm run db:test:pristine && NODE_ENV=test jest",
     "test:watch": "npm run db:test:pristine && NODE_ENV=test jest --watch",
@@ -21,8 +21,7 @@
     "db:test:reset": "NODE_ENV=test ts-node ./src/db/helpers/resetDb.ts",
     "db:test:latest": "NODE_ENV=test knex --knexfile ./src/db/knexfile.ts migrate:latest",
     "db:test:seed": "NODE_ENV=test knex --knexfile ./src/db/knexfile.ts seed:run",
-    "db:test:pristine": "npm run db:test:reset && npm run db:test:latest && npm run db:test:seed",
-    "pm2": "npm run build && pm2 start ecosystem.config.js"
+    "db:test:pristine": "npm run db:test:reset && npm run db:test:latest && npm run db:test:seed"
   },
   "author": "claire.froelich@postman.com",
   "license": "ISC",
