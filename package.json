@@ -21,7 +21,8 @@
     "db:test:reset": "NODE_ENV=test ts-node ./src/db/helpers/resetDb.ts",
     "db:test:latest": "NODE_ENV=test knex --knexfile ./src/db/knexfile.ts migrate:latest",
     "db:test:seed": "NODE_ENV=test knex --knexfile ./src/db/knexfile.ts seed:run",
-    "db:test:pristine": "npm run db:test:reset && npm run db:test:latest && npm run db:test:seed"
+    "db:test:pristine": "npm run db:test:reset && npm run db:test:latest && npm run db:test:seed",
+    "pm2": "npm run build && pm2 start ecosystem.config.js"
   },
   "author": "claire.froelich@postman.com",
   "license": "ISC",
