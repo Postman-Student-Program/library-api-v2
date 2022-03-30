@@ -25,11 +25,8 @@ const knexConfig: { [key: string]: any } = {
     client: 'postgresql',
     connection: config.prodDbConnectionUrl,
     pool: {
-      min: 2,
-      max: 10,
-      afterCreate: (conn: any, done: any) => {
-        done(null, conn)
-      }
+      min: 0,
+      max: 10
     }
   },
   migrations: {
