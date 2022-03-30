@@ -26,7 +26,10 @@ const knexConfig: { [key: string]: any } = {
     connection: config.prodDbConnectionUrl,
     pool: {
       min: 2,
-      max: 10
+      max: 10,
+      afterCreate: (conn: any, done: any) => {
+        done(null, conn)
+      }
     }
   },
   migrations: {
