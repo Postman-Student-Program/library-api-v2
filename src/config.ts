@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
+import path from 'path'
 
-dotenv.config({ path: __dirname + '/../.env' })
+dotenv.config({ path: path.resolve(__dirname, '..', '.env') })
 
 /** List any required env vars here */
 const required: string[] = []
