@@ -24,6 +24,7 @@ const knexConfig: { [key: string]: any } = {
   production: {
     client: 'postgresql',
     connection: config.prodDbConnectionUrl,
+    acquireConnectionTimeout: 20000,
     pool: {
       min: 0,
       max: 10
