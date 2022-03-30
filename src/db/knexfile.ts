@@ -23,7 +23,7 @@ const knexConfig: { [key: string]: any } = {
   },
   production: {
     client: 'postgresql',
-    connection: config.prodDatabaseUrl,
+    connection: config.prodDbConnectionUrl,
     pool: {
       min: 2,
       max: 10

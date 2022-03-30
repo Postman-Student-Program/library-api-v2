@@ -13,6 +13,7 @@
     "clean": "rm -fr dist",
     "psql": "psql -U librarian library_api_dev",
     "db:init": "psql postgres -f ./src/db/sql/init.sql",
+    "db:init:prod": "psql postgres --password -f ./src/db/sql/init-prod.sql",
     "db:migrate:make": "knex --knexfile ./src/db/knexfile.ts migrate:make",
     "db:dev:reset": "NODE_ENV=development ts-node ./src/db/helpers/resetDb.ts",
     "db:dev:latest": "NODE_ENV=development knex --knexfile ./src/db/knexfile.ts migrate:latest",
@@ -21,7 +22,9 @@
     "db:test:reset": "NODE_ENV=test ts-node ./src/db/helpers/resetDb.ts",
     "db:test:latest": "NODE_ENV=test knex --knexfile ./src/db/knexfile.ts migrate:latest",
     "db:test:seed": "NODE_ENV=test knex --knexfile ./src/db/knexfile.ts seed:run",
-    "db:test:pristine": "npm run db:test:reset && npm run db:test:latest && npm run db:test:seed"
+    "db:test:pristine": "npm run db:test:reset && npm run db:test:latest && npm run db:test:seed",
+    "db:prod:latest": "NODE_ENV=production knex --knexfile ./src/db/knexfile.ts migrate:latest",
+    "db:prod:seed": "NODE_ENV=production knex --knexfile ./src/db/knexfile.ts seed:run"
   },
   "author": "claire.froelich@postman.com",
   "license": "ISC",
