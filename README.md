@@ -6,7 +6,7 @@
 
 You will need to have [Postgres](https://www.postgresql.org/) installed to run test and development databases.
 
-Once Postgres is install, you should have access to the `psql` command.
+Once Postgres is installed, you should have access to the `psql` command.
 
 ### Initialize database
 

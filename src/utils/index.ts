@@ -36,7 +36,11 @@ export const filterObjStringsForProfanity = <T extends { [key: string]: any }>(
   Object.entries(obj).forEach(([k, v]) => {
     filtered[k] = v
     if (typeof v === 'string') {
-      filtered[k] = filterProfanity(v)
+      try {
+        filtered[k] = filterProfanity(v)
+      } catch (err) {
+        console.error(`Couldn't check ${v} for profanity.`);
+      };
     }
   })
   return filtered as T
